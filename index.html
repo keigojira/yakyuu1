@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>野球スコアボード</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>野球スコアボード</h1>
+
+    <div id="setup-section" class="section">
+        <h2>試合設定</h2>
+        <div class="input-group">
+            <label for="awayTeamNameInput">先攻チーム名:</label>
+            <input type="text" id="awayTeamNameInput" value="ビジターズ">
+        </div>
+        <div class="input-group">
+            <label for="homeTeamNameInput">後攻チーム名:</label>
+            <input type="text" id="homeTeamNameInput" value="ホームズ">
+        </div>
+        <button id="startGameButton">試合開始</button>
+    </div>
+
+    <div id="scoreboard-section" class="section hidden">
+        <h2>現在の試合</h2>
+        <div class="scoreboard">
+            <div class="scoreboard-header">
+                <div class="team-label"></div>
+                <div class="inning-col">1</div>
+                <div class="inning-col">2</div>
+                <div class="inning-col">3</div>
+                <div class="inning-col">4</div>
+                <div class="inning-col">5</div>
+                <div class="inning-col">6</div>
+                <div class="inning-col">7</div>
+                <div class="inning-col">8</div>
+                <div class="inning-col">9</div>
+                <div class="r-h-e">R</div>
+                <div class="r-h-e">H</div>
+                <div class="r-h-e">E</div>
+            </div>
+            <div class="team-row away-team">
+                <div class="team-label" id="awayTeamLabel">アウェイ</div>
+                <div class="total-score" id="awayTotalScore">0</div>
+                <div class="stat-h">0</div>
+                <div class="stat-e">0</div>
+            </div>
+            <div class="team-row home-team">
+                <div class="team-label" id="homeTeamLabel">ホーム</div>
+                <div class="total-score" id="homeTotalScore">0</div>
+                <div class="stat-h">0</div>
+                <div class="stat-e">0</div>
+            </div>
+        </div>
+
+        <div class="game-info">
+            <span id="currentInningInfo">1回表</span>
+            <span id="outsInfo">O: 0</span>
+            <span id="ballsInfo">B: 0</span>
+            <span id="strikesInfo">S: 0</span>
+        </div>
+
+        <div class="bases-diagram">
+            <div id="firstBase" class="base"></div>
+            <div id="secondBase" class="base"></div>
+            <div id="thirdBase" class="base"></div>
+            <div id="homePlate" class="base home-plate"></div>
+        </div>
+
+        <div class="controls">
+            <h3>スコア操作</h3>
+            <div class="button-group">
+                <button id="addRun">得点追加 (+1)</button>
+                <button id="subtractRun" class="danger">得点削減 (-1)</button>
+                <button id="addOut">アウト追加 (+1)</button>
+                <button id="subtractOut" class="danger">アウト削減 (-1)</button>
+            </div>
+
+            <h3>塁上操作</h3>
+            <div class="button-group">
+                <button id="singleHit">単打 (1B)</button>
+                <button id="doubleHit">二塁打 (2B)</button>
+                <button id="tripleHit">三塁打 (3B)</button>
+                <button id="homeRun">本塁打 (HR)</button>
+                <button id="clearBases" class="danger">塁上クリア</button>
+            </div>
+
+            <h3>投球数操作</h3>
+            <div class="button-group">
+                <button id="addBall">ボール (+1B)</button>
+                <button id="addStrike">ストライク (+1S)</button>
+                <button id="resetCount">カウントリセット</button>
+            </div>
+
+            <h3>イニング・試合操作</h3>
+            <div class="button-group">
+                <button id="nextInning">次イニング</button>
+                <button id="switchSides">攻守交代</button>
+                <button id="endGame" class="danger">試合終了</button>
+                <button id="resetGame" class="danger">試合リセット</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="history-section" class="section hidden">
+        <h2>試合履歴</h2>
+        <ul id="gameHistoryList">
+            </ul>
+        <button id="clearHistoryButton" class="danger">履歴をクリア</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
