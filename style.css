@@ -1,0 +1,304 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    margin-bottom: 30px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- Setup Section --- */
+#setup-section .input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#setup-section label {
+    margin-right: 10px;
+    font-weight: bold;
+    width: 120px;
+    text-align: right;
+}
+
+#setup-section input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex-grow: 1;
+    max-width: 250px;
+}
+
+#startGameButton {
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    padding: 12px 25px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#startGameButton:hover {
+    background-color: #218838;
+}
+
+/* --- Scoreboard Section --- */
+.scoreboard {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(9, 0.5fr) 0.5fr 0.5fr 0.5fr; /* Team + 9 Innings + RHE */
+    gap: 1px;
+    background-color: #ccc; /* Grid lines */
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    overflow-x: auto; /* For small screens */
+}
+
+.scoreboard-header, .team-row {
+    display: contents; /* Allows grid children to be direct children of .scoreboard */
+}
+
+.scoreboard-header > div, .team-row > div {
+    background-color: #f8f8f8;
+    padding: 10px 5px;
+    text-align: center;
+    font-weight: bold;
+    white-space: nowrap;
+    border: 1px solid #eee; /* Inner borders */
+}
+
+.team-label {
+    grid-column: 1;
+    text-align: left;
+    padding-left: 15px !important;
+}
+
+.inning-col {
+    background-color: #e0e0e0 !important;
+}
+
+.team-row.away-team .team-label { grid-row: 2; }
+.team-row.home-team .team-label { grid-row: 3; }
+
+/* Inning scores are dynamically added, so they inherit from .team-row > div */
+
+.total-score, .stat-h, .stat-e {
+    background-color: #dbe9f6 !important;
+    font-size: 1.1em;
+}
+
+.team-row.away-team .total-score { grid-column: 11; }
+.team-row.away-team .stat-h { grid-column: 12; }
+.team-row.away-team .stat-e { grid-column: 13; }
+
+.team-row.home-team .total-score { grid-column: 11; }
+.team-row.home-team .stat-h { grid-column: 12; }
+.team-row.home-team .stat-e { grid-column: 13; }
+
+/* Dynamic Inning Score Styles */
+.team-row > div:nth-child(n+2):nth-child(-n+10) { /* Selects inning score divs */
+    background-color: #fff;
+    font-weight: normal;
+}
+
+/* Game Info */
+.game-info {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.game-info span {
+    font-weight: bold;
+    color: #4a4a4a;
+}
+
+/* Bases Diagram */
+.bases-diagram {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+}
+
+.base {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #bbb;
+    border: 1px solid #999;
+    transform: rotate(45deg);
+    transition: background-color 0.3s ease;
+}
+
+.base.active {
+    background-color: #ffeb3b; /* Yellow for active */
+    border-color: #fbc02d;
+}
+
+/* Position bases */
+#firstBase { top: 20px; right: 20px; }
+#secondBase { top: 60px; left: 60px; }
+#thirdBase { top: 20px; left: 20px; }
+.home-plate { bottom: 10px; left: calc(50% - 15px); transform: none; border-radius: 5px; background-color: #ccc; }
+
+
+/* Controls */
+.controls h3 {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #34495e;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.button-group button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 120px;
+}
+
+.button-group button:hover {
+    background-color: #2980b9;
+}
+
+.button-group button.danger {
+    background-color: #e74c3c;
+}
+
+.button-group button.danger:hover {
+    background-color: #c0392b;
+}
+
+/* --- History Section --- */
+#gameHistoryList {
+    list-style: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #fdfdfd;
+}
+
+#gameHistoryList li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95em;
+    color: #555;
+}
+
+#gameHistoryList li:last-child {
+    border-bottom: none;
+}
+
+#gameHistoryList li strong {
+    color: #2c3e50;
+}
+
+#clearHistoryButton {
+    display: block;
+    width: 150px;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#clearHistoryButton:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .scoreboard {
+        grid-template-columns: 1.5fr repeat(9, 0.7fr) 0.7fr 0.7fr 0.7fr;
+    }
+    .inning-col, .r-h-e, .total-score, .stat-h, .stat-e, .inning-score {
+        font-size: 0.9em;
+        padding: 8px 3px;
+    }
+
+    .button-group button {
+        padding: 8px 12px;
+        font-size: 0.9em;
+        min-width: unset;
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        margin: 10px;
+    }
+    .section {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+    .scoreboard {
+        font-size: 0.8em;
+    }
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
